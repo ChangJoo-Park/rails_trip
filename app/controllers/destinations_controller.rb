@@ -24,6 +24,7 @@ class DestinationsController < ApplicationController
   # GET /destinations/new
   # GET /destinations/new.json
   def new
+    @trip = Trip.find(params[:trip_id])
     @destination = Destination.new
 
     respond_to do |format|
@@ -34,17 +35,19 @@ class DestinationsController < ApplicationController
 
   # GET /destinations/1/edit
   def edit
-    @destination = Destination.find(params[:id])
+    @trip = Trip.find(params[:trip_id])
+    @destination = @trip.destinations.find(params[:id])
   end
 
   # POST /destinations
   # POST /destinations.json
   def create
-    @destination = Destination.new(params[:destination])
+    @trip = Trip.find(params[:trip_id])
+    @destination = @trip.destinations.new(params[:destination])
 
     respond_to do |format|
       if @destination.save
-        format.html { redirect_to @destination, notice: 'Destination was successfully created.' }
+        format.html { redirect_to trip_path(@trip)}
         format.json { render json: @destination, status: :created, location: @destination }
       else
         format.html { render action: "new" }
@@ -56,11 +59,12 @@ class DestinationsController < ApplicationController
   # PUT /destinations/1
   # PUT /destinations/1.json
   def update
-    @destination = Destination.find(params[:id])
+    @trip = Trip.find(params[:trip_id])
+    @destination = @trip.destinations.find(params[:id])
 
     respond_to do |format|
       if @destination.update_attributes(params[:destination])
-        format.html { redirect_to @destination, notice: 'Destination was successfully updated.' }
+        format.html { redirect_to trip_path(@trip) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -72,11 +76,12 @@ class DestinationsController < ApplicationController
   # DELETE /destinations/1
   # DELETE /destinations/1.json
   def destroy
-    @destination = Destination.find(params[:id])
+    @trip = Trip.find(params[:trip_id])
+    @destination = @trip.destinations.find(params[:id])
     @destination.destroy
 
     respond_to do |format|
-      format.html { redirect_to destinations_url }
+      format.html { redirect_to trip_path(@trip) }
       format.json { head :no_content }
     end
   end
