@@ -1,0 +1,11 @@
+<header class="navbar">
+	<div class="navbar-inner">
+		<%= link_to 'My Own Trip', root_path, class: 'brand' %>
+		<nav >
+			<ul class="nav">
+				<li class="<%= 'active' if current_page?(trips_path)%>"><%= link_to 'Trip List',trips_path %></li>
+				<li class="<%= 'active' if current_page?(destinations_path)%>"><%= link_to 'Destination List', destinations_path %></li>
+			</ul>
+		</nav>
+	</div>
+</header>

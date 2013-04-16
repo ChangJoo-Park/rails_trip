@@ -1,16 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
-  <%= @trip.name %>
+  <h1>Name:
+  <%= @trip.name %></h1>
 </p>
 
 <p>
-  <b>Description:</b>
-  <%= @trip.description %>
+  <h2>Description: 
+  <%= @trip.description %></h2>
 </p>
 
-<table>
+<table class='table'>
 	<tr>
 		<th>Name </th>
 		<th>Description</th>
@@ -20,7 +20,7 @@
 	<tr>
 		<td><%= link_to destination.name, edit_trip_destination_path(@trip,destination) %></td>
 		<td><%= destination.description %></td>
-		<td><%= link_to 'Remove', trip_destination_path(@trip , destination), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td><%= link_to 'Remove', trip_destination_path(@trip , destination), method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-danger" %></td>
 
 	</tr>
 	<% end %>
@@ -28,8 +28,9 @@
 
 
 <p>
-	<%= link_to 'New Destination', new_trip_destination_path(@trip) %>
+	<%= link_to 'New Destination', new_trip_destination_path(@trip), class: "btn btn-primary" %>
 </p>
-
+<div class="pull-right">
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>
+</div>
